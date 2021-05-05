@@ -1,9 +1,7 @@
 #include "helpers.h"
 #import <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
 #include <math.h>
-#include <string.h>
 
 // template functions
 int findMin(int start, int width, HSVTRIPLE image[width]);
@@ -72,11 +70,11 @@ void insertionSort(int height, int width, RGBTRIPLE image[height][width]) {
     }
 
     // TODO: insertion sort by hue each row of newIm - feel free to ignore this pseudo-code and write your own!
-    // (1) iterate through all rows
-        // (2) iterate through all columns for each row
-            // (3) for each column index (our current index), check prev entries while the value at our current index is greater than the value at this entry
-            // (4) if we stopped in (3), copy the value at our current index
-                // (5) copy each index starting from where we stopped in (3) into the index that proceeds it, until our current index is overwritten by the value that preceeds it
+    // (1) iterate i through all rows
+        // (2) iterate j through all columns for each row
+            // (3) for each j column index, check previous entries while the value at index j is greater than the value at this entry
+            // (4) if we stopped in (3), copy the value at our j index
+                // (5) copy each index from where we stopped in (3) into the index that proceeds it, until our index j is overwritten by the value that preceeds it
                 // (6) insert our copied value from (4) into the location where we stopped in (3)
     
     // convert image from hsv to rgb
