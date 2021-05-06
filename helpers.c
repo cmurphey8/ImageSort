@@ -4,6 +4,7 @@
 #include <math.h>
 
 // template functions
+int findMinIndex(int height, int width, HSVTRIPLE image[height][width], int index[height]);
 int findMin(int start, int width, HSVTRIPLE image[width]);
 
 HSVTRIPLE rgbHSV(RGBTRIPLE px);
@@ -14,7 +15,7 @@ double getSat(RGBTRIPLE px, double cMax, double cMin);
 
 RGBTRIPLE hsvRGB(HSVTRIPLE px);
 
-// selection sort
+// TODO: selection sort
 void selectionSort(int height, int width, RGBTRIPLE image[height][width]) {
 
     // convert image from rgb to hsv
@@ -30,6 +31,7 @@ void selectionSort(int height, int width, RGBTRIPLE image[height][width]) {
         for (int j = 0; j < width; j++) {
             int index = findMin(j, width, newIm[i]);
             if (index > j) {
+                // TODO: swap our current HSVTRIPLE element (column j) with the element in column index
                 HSVTRIPLE tmp = newIm[i][j];
                 newIm[i][j] = newIm[i][index];
                 newIm[i][index] = tmp;
@@ -46,49 +48,21 @@ void selectionSort(int height, int width, RGBTRIPLE image[height][width]) {
     return;
 }
 
+// TODO: selection sort helper function
 int findMin(int start, int width, HSVTRIPLE image[width]) {
     int min = image[start].hue;
     int index = start;
-    for (int i = start; i < width; i++) {
-        if (image[i].hue < min) {
-            min = image[i].hue;
-            index = i;
-        }
-    }
+    // TODO: find the index in range [start,width) of the row image[width] with the minimum hue
+
     return index;
 }
 
-// insertion sort
-void insertionSort(int height, int width, RGBTRIPLE image[height][width]) {
-
-    // convert image from rgb to hsv
-    HSVTRIPLE newIm[height][width];
-    for (int i = 0; i < height; i++) {
-        for (int j = 0; j < width; j++) {
-            newIm[i][j] = rgbHSV(image[i][j]);
-        }
-    }
-
-    // TODO: insertion sort by hue each row of newIm - feel free to ignore this pseudo-code and write your own!
-    // (1) iterate i through all rows
-        // (2) iterate j through all columns for each row
-            // (3) for each j column index, check previous entries while the value at index j is greater than the value at this entry
-            // (4) if we stopped in (3), copy the value at our j index
-                // (5) copy each index from where we stopped in (3) into the index that proceeds it, until our index j is overwritten by the value that preceeds it
-                // (6) insert our copied value from (4) into the location where we stopped in (3)
-    
-    // convert image from hsv to rgb
-    for (int i = 0; i < height; i++) {
-        for (int j = 0; j < width; j++) {
-            image[i][j] = hsvRGB(newIm[i][j]);
-        }
-    }
-    return;
-}
 
 
+/*  -------------------------------------------------------------------------------------------------------------------------------------
+    NOTE: ALL FUNCTIONS BELOW ARE COMPLETE! NO CHANGES PLEASE!!
+    -------------------------------------------------------------------------------------------------------------------------------------  */
 
-// NOTE: ALL FUNCTIONS BELOW ARE COMPLETE! NO CHANGES PLEASE!!
 
 // Convert from rgb to hsv and back
 void transform(int height, int width, RGBTRIPLE image[height][width]) {
