@@ -110,11 +110,6 @@ int main(int argc, char *argv[])
             selectionSort(height, width, image);
             break;
 
-        // insertion sort by hue
-        case 'i':
-            insertionSort(height, width, image);
-            break;
-
         // try combinations of sorting methods
         case 'c':
             insertionSort(height, width, image);
