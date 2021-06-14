@@ -15,6 +15,10 @@ double getSat(RGBTRIPLE px, double cMax, double cMin);
 
 RGBTRIPLE hsvRGB(HSVTRIPLE px);
 
+void combinationSort(int height, int width, RGBTRIPLE image[height][width]) {
+    // YOU CAN IGNORE THIS FUNCTION FOR NOW!
+}
+
 // TODO: selection sort
 void selectionSort(int height, int width, RGBTRIPLE image[height][width]) {
 
@@ -26,12 +30,13 @@ void selectionSort(int height, int width, RGBTRIPLE image[height][width]) {
         }
     }
 
-    // selection sort by hue
+    // selection sort each row by hue
+    // walk through rows
     for (int i = 0; i < height; i++) {
+        // TODO: for each j index, find the minimum in range [j,width) and swap with j
         for (int j = 0; j < width; j++) {
             int index = findMin(j, width, newIm[i]);
             if (index > j) {
-                // TODO: swap our current HSVTRIPLE element (column j) with the element in column index
                 HSVTRIPLE tmp = newIm[i][j];
                 newIm[i][j] = newIm[i][index];
                 newIm[i][index] = tmp;
