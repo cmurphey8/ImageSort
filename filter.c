@@ -112,7 +112,7 @@ int main(int argc, char *argv[])
 
         // try combinations of sorting methods
         case 'c':
-            insertionSort(height, width, image);
+            combinationSort(height, width, image);
             break;
 
     }
