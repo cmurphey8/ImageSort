@@ -62,6 +62,22 @@ int findMin(int start, int width, HSVTRIPLE image[width]) {
 /*  -------------------------------------------------------------------------------------------------------------------------------------
     NOTE: ALL FUNCTIONS BELOW ARE COMPLETE! NO CHANGES PLEASE!!
     -------------------------------------------------------------------------------------------------------------------------------------  */
+// Convert from rgb to hsv and back
+void transform(int height, int width, RGBTRIPLE image[height][width]) {
+    HSVTRIPLE newIm[height][width];
+    for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width; j++) {
+            newIm[i][j] = rgbHSV(image[i][j]);
+            image[i][j] = hsvRGB(newIm[i][j]);
+
+            // ALT: generate a random image
+            // image[i][j].rgbtRed = (rand() % (256));
+            // image[i][j].rgbtGreen = (rand() % (256));
+            // image[i][j].rgbtBlue = (rand() % (256));
+        }
+    }
+    return;
+}
 
 HSVTRIPLE rgbHSV(RGBTRIPLE px) {
     HSVTRIPLE newPx;
