@@ -35,7 +35,6 @@ void selectionSort(int height, int width, RGBTRIPLE image[height][width]) {
     }
 
     // selection sort each row by hue
-    // walk through rows
     for (int i = 0; i < height; i++) {
         for (int j = 0; j < width; j++) {
             // YOU DO: complete helper function findMin to find the minimum in range [j,width)
