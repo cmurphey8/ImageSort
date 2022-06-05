@@ -8,7 +8,7 @@ int main(int argc, char *argv[])
 {
 
     // Define allowable filters
-    char *filters = "tsic";
+    char *filters = "s";
 
     // Get filter flag and check validity
     char filter = getopt(argc, argv, filters);
@@ -100,21 +100,10 @@ int main(int argc, char *argv[])
     // Filter image
     switch (filter)
     {
-        // transform rgb to hsv and back
-        case 't':
-            transform(height, width, image);
-            break;
-
         // selection sort by hue
         case 's':
             selectionSort(height, width, image);
             break;
-
-        // try combinations of sorting methods
-        case 'c':
-            combinationSort(height, width, image);
-            break;
-
     }
 
     // Write outfile's BITMAPFILEHEADER

@@ -76,8 +76,8 @@ RGBTRIPLE;
 
 typedef struct
 {
-    float  hue;
-    float  sat;
-    float  val;
+    double  hue;
+    double  sat;
+    double  val;
 }
 HSVTRIPLE;

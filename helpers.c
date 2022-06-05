@@ -3,21 +3,25 @@
 #include <stdlib.h>
 #include <math.h>
 
-// template functions
-int findMinIndex(int height, int width, HSVTRIPLE image[height][width], int index[height]);
+/*  -------------------------------------------------------------------------------------------------------------------------------------
+    TEMPLATE FUNCTIONS
+    -------------------------------------------------------------------------------------------------------------------------------------  */
+
+// selection sort helper
 int findMin(int start, int width, HSVTRIPLE image[width]);
 
+// convert rgb to hsv and helpers
 HSVTRIPLE rgbHSV(RGBTRIPLE px);
 int max(int x, int y);
 int min(int x, int y);
 double getHue(RGBTRIPLE px, double cMax, double cMin);
-double getSat(RGBTRIPLE px, double cMax, double cMin);
 
+// convert hsv to rgb
 RGBTRIPLE hsvRGB(HSVTRIPLE px);
 
-void combinationSort(int height, int width, RGBTRIPLE image[height][width]) {
-    // YOU CAN IGNORE THIS FUNCTION FOR NOW!
-}
+/*  -------------------------------------------------------------------------------------------------------------------------------------
+    TODOS: SELECTION SORT AND HELPER
+    -------------------------------------------------------------------------------------------------------------------------------------  */
 
 // TODO: selection sort
 void selectionSort(int height, int width, RGBTRIPLE image[height][width]) {
@@ -33,14 +37,11 @@ void selectionSort(int height, int width, RGBTRIPLE image[height][width]) {
     // selection sort each row by hue
     // walk through rows
     for (int i = 0; i < height; i++) {
-        // TODO: for each j index, find the minimum in range [j,width) and swap with j
         for (int j = 0; j < width; j++) {
+            // YOU DO: complete helper function findMin to find the minimum in range [j,width)
             int index = findMin(j, width, newIm[i]);
-            if (index > j) {
-                HSVTRIPLE tmp = newIm[i][j];
-                newIm[i][j] = newIm[i][index];
-                newIm[i][index] = tmp;
-            }
+
+            // WE DO: swap values at minimum index and j
         }
     }
 
@@ -53,59 +54,39 @@ void selectionSort(int height, int width, RGBTRIPLE image[height][width]) {
     return;
 }
 
-// TODO: selection sort helper function
+// YOU DO: selection sort helper function
 int findMin(int start, int width, HSVTRIPLE image[width]) {
     int min = image[start].hue;
     int index = start;
-    // TODO: find the index in range [start,width) of the row image[width] with the minimum hue
+    // YOU DO: find the index in range [start,width) of the row image[width] with the minimum hue
 
     return index;
 }
 
-
-
 /*  -------------------------------------------------------------------------------------------------------------------------------------
-    NOTE: ALL FUNCTIONS BELOW ARE COMPLETE! NO CHANGES PLEASE!!
+   COMPLETE HELPER FUNCTIONS -- MAKE NO CHANGES BELOW
     -------------------------------------------------------------------------------------------------------------------------------------  */
-// Convert from rgb to hsv and back
-void transform(int height, int width, RGBTRIPLE image[height][width]) {
-    HSVTRIPLE newIm[height][width];
-    for (int i = 0; i < height; i++) {
-        for (int j = 0; j < width; j++) {
-            newIm[i][j] = rgbHSV(image[i][j]);
-            image[i][j] = hsvRGB(newIm[i][j]);
-
-            // ALT: generate a random image
-            // image[i][j].rgbtRed = (rand() % (256));
-            // image[i][j].rgbtGreen = (rand() % (256));
-            // image[i][j].rgbtBlue = (rand() % (256));
-        }
-    }
-    return;
-}
 
 HSVTRIPLE rgbHSV(RGBTRIPLE px) {
     HSVTRIPLE newPx;
     double cMax = max(max(px.rgbtRed, px.rgbtGreen), px.rgbtBlue);
     double cMin = min(min(px.rgbtRed, px.rgbtGreen), px.rgbtBlue);
     newPx.hue = getHue(px, cMax, cMin);
-    newPx.sat = 0.85; //getSat(px, cMax, cMin);
-    newPx.val = 1; //cMax / 255.0;
+
+    // regularize saturation and value across all pixels
+    newPx.sat = 0.85;
+    newPx.val = 1;
     return newPx;
 }
 
-// generic max / min functions
+// generic max && min functions
 int max(int x, int y) {
-    if(x > y) {
-        return x;
-    }
+    if(x > y) return x;
     return y;
 }
 
 int min(int x, int y) {
-    if(x < y) {
-        return x;
-    }
+    if(x < y) return x;
     return y;
 }
 
@@ -117,14 +98,6 @@ double getHue(RGBTRIPLE px, double cMax, double cMin) {
     if (cMax == px.rgbtGreen) return (int) (60.0 * ((px.rgbtBlue - px.rgbtRed) / dx) + 120) % 360;
     if (cMax == px.rgbtBlue) return (int) (60.0 * ((px.rgbtRed - px.rgbtGreen) / dx) + 240) % 360;
     return 0.0;
-}
-
-// helper function to convert rgb to hsv
-double getSat(RGBTRIPLE px, double cMax, double cMin) {
-    if (cMax < 0.0001) {
-        return 0.0;
-    }
-    return (cMax - cMin) / cMax;
 }
 
 RGBTRIPLE hsvRGB(HSVTRIPLE px) {
